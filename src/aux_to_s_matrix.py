@@ -8,6 +8,13 @@ import os
 def main(nirs_path, behav_path, subject_number):
 
     # -------------------------------
+    # Resolve project root properly
+    # -------------------------------
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    output_dir = os.path.join(project_root, "data", "processed_nirs")
+    os.makedirs(output_dir, exist_ok=True)
+
+    # -------------------------------
     # 1) Load NIRS file
     # -------------------------------
     data = loadmat(nirs_path)
@@ -26,19 +33,32 @@ def main(nirs_path, behav_path, subject_number):
 
     threshold = 1.0
     digital = aux0 > threshold
-
     onsets = np.where(digital[1:] & ~digital[:-1])[0] + 1
+
     print("Detected AUX events:", len(onsets))
+
+    # HARD STOP if no triggers
+    if len(onsets) == 0:
+        raise ValueError(
+            f"No AUX triggers detected. Cannot time-lock this run."
+        )
 
     # -------------------------------
     # 3) Load Behavioral Data
     # -------------------------------
     behav = pd.read_excel(behav_path)
 
-    # Filter to subject
+    # Ensure correct dtype
+    behav["SubNum"] = behav["SubNum"].astype(int)
+
     behav_sub = behav[behav["SubNum"] == subject_number]
 
     print("Behavioral trials (filtered):", len(behav_sub))
+
+    if len(behav_sub) == 0:
+        raise ValueError(
+            f"No behavioral trials found for SubNum {subject_number}"
+        )
 
     # -------------------------------
     # 4) Sanity Check
@@ -48,13 +68,11 @@ def main(nirs_path, behav_path, subject_number):
         print("AUX events:", len(onsets))
         print("Behavioral trials:", len(behav_sub))
         print("Proceeding with minimum length to avoid crash.")
-    
+
     min_len = min(len(onsets), len(behav_sub))
 
     # -------------------------------
     # 5) Build S Matrix
-    #    Column 0 = Shape (TType == 1)
-    #    Column 1 = Color (TType == 2)
     # -------------------------------
     n_times = len(t)
     S_new = np.zeros((n_times, 2))
@@ -82,14 +100,9 @@ def main(nirs_path, behav_path, subject_number):
     # -------------------------------
     base = os.path.basename(nirs_path)
     name, _ = os.path.splitext(base)
-
-    output_dir = os.path.join("..", "data", "processed_nirs")
-    
-    # Create folder if it doesn't exist
-    os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, f"{name}_updated.nirs")
 
-    savemat(output_path, data)
+    savemat(output_path, data, appendmat=False)
 
     print("Saved:", output_path)
 
@@ -101,9 +114,9 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Convert AUX to S matrix")
 
-    parser.add_argument("--nirs", required=True, help="Path to .nirs file")
-    parser.add_argument("--behav", required=True, help="Path to behavioral Excel file")
-    parser.add_argument("--sub", required=True, type=int, help="Subject number")
+    parser.add_argument("--nirs", required=True)
+    parser.add_argument("--behav", required=True)
+    parser.add_argument("--sub", required=True, type=int)
 
     args = parser.parse_args()
 

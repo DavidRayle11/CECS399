@@ -1,0 +1,14 @@
+S120_run02.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1120
+S121_run03.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1121
+S122_run02.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1122
+S123_run01.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1123
+S124_run03.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1124
+S127_run02.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1127
+S129_run01.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1129
+S130_run01.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1130
+S171_run01.nirs | Folder: S1 | Error: No AUX triggers detected. Cannot time-lock this run.
+S174_run03.nirs | Folder: S1 | Error: No behavioral trials found for SubNum 1174
+L148_run01.nirs | Folder: S3 | Error: No behavioral trials found for SubNum 3148
+L166_run01.nirs | Folder: S3 | Error: No behavioral trials found for SubNum 3166
+L3122_run01.nirs | Folder: S3 | Error: No behavioral trials found for SubNum 3122
+L3128_run01.nirs | Folder: S3 | Error: No behavioral trials found for SubNum 3128
