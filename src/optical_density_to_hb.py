@@ -11,6 +11,9 @@ from mne.channels import make_dig_montage
 
 from collections import defaultdict
 
+# TODO: Refactor to work after motion artifact correction
+#       It currently doesn't pull from the right data files
+
 # load files and return data
 def load_nirs(file_path):
     data = loadmat(file_path, appendmat=False)
