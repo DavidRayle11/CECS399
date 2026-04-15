@@ -1,0 +1,17 @@
+                Mixed Linear Model Regression Results
+======================================================================
+Model:               MixedLM   Dependent Variable:   activation_scaled
+No. Observations:    3648      Method:               REML             
+No. Groups:          58        Scale:                0.0648           
+Min. group size:     48        Log-Likelihood:       -198.6028        
+Max. group size:     96        Converged:            Yes              
+Mean group size:     62.9                                             
+----------------------------------------------------------------------
+                            Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+----------------------------------------------------------------------
+Intercept                    0.000    0.034  0.004 0.997 -0.067  0.067
+C(Condition)[T.Condition_2]  0.000    0.008  0.047 0.962 -0.016  0.017
+age_years                    0.001    0.009  0.075 0.940 -0.017  0.019
+accuracy                    -0.027    0.019 -1.410 0.159 -0.064  0.010
+Group Var                    0.000    0.000                           
+======================================================================
