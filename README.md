@@ -1,6 +1,8 @@
 # CECS399
 This is a group repository for the CECS399/499 Capstone class. Where we will have a mentor giving us a project to do over the course of the Spring 26 semester.
 
+Here is a link to the final application: https://drive.google.com/file/d/12rg9TZ7yyAreFg62wXUaYDpdZvuCkXFP/view?usp=sharing
+
 # Research Question
 How does cortical activation associated with attentional control during the triad classification task change across early childhood?
 
